@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/01/24 17:56:44 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/01/24 19:42:22 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
+# include "mlx.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+
+# define WIDTH 1280
+# define HEIGHT 720
 
 /*	STRUCTS	*/
 typedef struct s_map
@@ -29,6 +33,12 @@ typedef struct s_map
 	char	*celling;
 }	t_map;
 
+typedef struct s_cub
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+}		t_cub;
 
 /*	FUNCTIONS	*/
 int handle_error();
