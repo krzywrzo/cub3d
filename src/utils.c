@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 17:41:29 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/01/24 19:41:30 by kwrzosek         ###   ########.fr       */
+/*   Created: 2026/01/24 18:30:06 by kwrzosek          #+#    #+#             */
+/*   Updated: 2026/01/24 18:32:41 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/cub3d.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t n)
+int ft_strlcmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	i;
+    size_t i;
 
-	i = 0;
-	dest = malloc(sizeof(char *) * n);
-	if (!dest)
-		return 0;
-	if (n == 0)
-		return (ft_strlen(src));
-	while (src[i] && i < n - 1)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	while (src[i])
-		i++;
-	return (i);
+    i = 0;
+    if (n == 0)
+        return (0);
+    while (s1[i] && s1[i] == s2[i] && i < n - 1)
+    {
+        i++;
+    }
+    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

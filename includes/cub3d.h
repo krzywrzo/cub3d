@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/01/24 17:56:44 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/01/24 18:33:34 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@ int		map_parse(char *map_path);
 char	space_to_zero (char s);
 void	handle_line(t_map *map, char *line);
 void	handle_file(int fd);
+void	print_struct(t_map *map);
+
+//	utils.c
+int ft_strlcmp(const char *s1, const char *s2, size_t n);
 
 # endif

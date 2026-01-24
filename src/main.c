@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:43:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/01/24 16:56:45 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/01/24 18:57:30 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 int handle_error()
 {
+	printf("error");
+	exit(1);
 	return (1);
 }
 
 int main (int argc, char **argv)
 {
-	char	*map_path;
-
-	if (argv != 2)
-	{
+	if (argc != 2)
 		return (1);
-	}
-	ft_strlcpy(map_path, argv[1], ft_strlen(argv[1]));
-	if (map_parse(map_path) == 1)
+	printf("[DEBUG]: argv[1]: %s\n", argv[1]);
+	if (map_parse(argv[1]) == 1)
 	{
 		return(handle_error());	//	TODO
 	}
