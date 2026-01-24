@@ -4,8 +4,8 @@
 
 NAME        = cub3D
 CC          = cc
-# CFLAGS      = -Wall -Wextra -Werror -g
-CFLAGS = -g
+#CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS		= -g
 
 # Directories
 SRC_DIR     = src

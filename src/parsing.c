@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 16:45:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/01/24 19:41:45 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/01/24 20:23:36 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	map_parse(char *map_path)
 		perror("Error with opening file");
 		return(handle_error());
 	}
-	printf("[DEBUG]: map_parse\n");
+	// printf("[DEBUG]: map_parse\n");
 	handle_file(fd);
 	close(fd);
 	return (0);
@@ -36,13 +36,12 @@ void	handle_file(int fd)
 	map = malloc(sizeof(t_map));
 	if (!map)
 		handle_error();
-	printf("[DEBUG]: handle_file - after struct malloc\n");
-
+	// printf("[DEBUG]: handle_file - after struct malloc\n");
 	while (line = get_next_line(fd))
 	{
-		printf("[DEBUG]: handle_file - while\n");
+		// printf("[DEBUG]: handle_file - while\n");
 		handle_line(map, line);
-		printf("line: %s\n", line);
+		// printf("line: %s\n", line);
 	}
 	print_struct(map);
 }
@@ -58,8 +57,8 @@ void	handle_line(t_map *map, char *line)
 		ft_strlcpy(map->we, line, ft_strlen(line));
 	else if (ft_strlcmp(line, "EA", 2) == 0)
 		ft_strlcpy(map->ea, line, ft_strlen(line));
-	else
-		return ;
+	else if (line[0] == '1')
+		ft_strlcat(map->one_line_map, line, ft_strlen(line));
 }
 
 void	print_struct(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:43:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/01/24 18:57:30 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/01/24 20:20:30 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,43 @@
 
 int handle_error()
 {
-	printf("error");
-	exit(1);
 	return (1);
 }
 
 int main (int argc, char **argv)
 {
+	char	*map_path;
+
 	if (argc != 2)
 		return (1);
-	printf("[DEBUG]: argv[1]: %s\n", argv[1]);
 	if (map_parse(argv[1]) == 1)
-	{
 		return(handle_error());	//	TODO
-	}
 }
+
+// int	close_app(void *param)
+// {
+// 	t_cub *cub;
+
+// 	cub = (t_cub *)param;
+// 	if (cub->win)
+// 		mlx_destroy_window(cub->mlx, cub->win);
+// 	mlx_destroy_display(cub->mlx);
+// 	free(cub->mlx);
+// 	exit(0);
+// 	return (0);
+// }
+
+// int	main(void)
+// {
+// 	t_cub cub;
+
+// 	cub.mlx = mlx_init();
+// 	if (!cub.mlx)
+// 		return (1);
+// 	cub.win = mlx_new_window(cub.mlx, WIDTH, HEIGHT, "cwel");
+// 	if (!cub.win)
+// 		return (1);
+// 	mlx_hook(cub.win, 17, 0, close_app, &cub);
+// 	mlx_loop(cub.mlx);
+// 	return (0);
+// }
