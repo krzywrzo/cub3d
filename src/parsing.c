@@ -6,72 +6,73 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 16:45:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/01/24 20:23:36 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/01/26 17:22:32 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	map_parse(char *map_path)
+t_map	*map_parse(char *map_path)
 {
-	int	fd;
+	int		fd;
+	t_map	*map;
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Error with opening file");
-		return(handle_error());
+		handle_error();
+		return (NULL);
 	}
-	// printf("[DEBUG]: map_parse\n");
-	handle_file(fd);
+	map = handle_file(fd);
 	close(fd);
-	return (0);
+	map->map = ft_split(map->one_line_map, 10);
+	if (!map->map)
+	{
+		free_map(map);
+		handle_error();
+	}
+	return (map);
 }
 
-void	handle_file(int fd)
+t_map	*handle_file(int fd)
 {
 	char	*line;
 	t_map	*map;
 
-	map = malloc(sizeof(t_map));
+	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		handle_error();
-	// printf("[DEBUG]: handle_file - after struct malloc\n");
 	while (line = get_next_line(fd))
 	{
-		// printf("[DEBUG]: handle_file - while\n");
 		handle_line(map, line);
-		// printf("line: %s\n", line);
+		free(line);
 	}
-	print_struct(map);
+	return (map);
 }
 
 //	FIX: add proper file structure checking
 void	handle_line(t_map *map, char *line)
 {
+	char	*temp;
+
 	if (ft_strlcmp(line, "NO", 2) == 0)
-		ft_strlcpy(map->no, line, ft_strlen(line));
+		map->no = ft_strdup(line);
 	else if (ft_strlcmp(line, "SO", 2) == 0)
-		ft_strlcpy(map->so, line, ft_strlen(line));
+		map->so = ft_strdup(line);
 	else if (ft_strlcmp(line, "WE", 2) == 0)
-		ft_strlcpy(map->we, line, ft_strlen(line));
+		map->we = ft_strdup(line);
 	else if (ft_strlcmp(line, "EA", 2) == 0)
-		ft_strlcpy(map->ea, line, ft_strlen(line));
-	else if (line[0] == '1')
-		ft_strlcat(map->one_line_map, line, ft_strlen(line));
-}
-
-void	print_struct(t_map *map)
-{
-	printf("%s\n", map->no);
-	printf("%s\n", map->so);
-	printf("%s\n", map->we);
-	printf("%s\n", map->ea);
-}
-
-char	space_to_zero (char s)
-{
-	if (s == ' ')
-		return ('0');
-	return (s);
+		map->ea = ft_strdup(line);
+	else if (line[0] == '1' || line[0] == '0')
+	{
+		temp = map->one_line_map;
+		if (!temp)
+			map->one_line_map = ft_strdup(line);
+		else
+		{
+			map->one_line_map = ft_strjoin(temp, line);
+			free(temp);
+		}
+	}
 }
