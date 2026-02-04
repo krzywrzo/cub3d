@@ -6,77 +6,53 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 10:52:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/02/04 16:56:53 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/02/04 19:23:54 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	flood_fill(t_map *map)
+int	is_map_correct(t_map *map)
 {
-	t_map_info *map_info;
+	t_map_info	*map_info;
 
-	map_info = malloc(sizeof(t_map_info));
+	map_info = struct_filler(map);
 	if (!map_info)
 		return (-1);
-	map_info->map_copy = ft_split(map->one_line_map, 10);
-	if (!map_info->map_copy)
-	{
-		free(map_info);
-		return (-1);
+	if (flood_fill(map_info, map_info->player_x, map_info->player_y) == 0)
+	{	
+		printf("Map is correct\n");
+		// free_struct(map_info);	// TODO: free_struct()
+		return (0);
 	}
-	get_pos(map_info->map_copy, map_info);
-	get_size(map_info->map_copy, map_info);
-
-	// int i = 0;
-	// while (map_info->map_copy[i])
-	// {
-	// 	printf("%s\n", map_info->map_copy[i]);
-	// 	i++;
-	// }
-	// printf("Player pos: [x] = %i [y] = %i\n", map_info->player_x, map_info->player_y);
-	// printf("Map size: [width] = %i [heigth] = %i", map_info->map_width, map_info->map_height);
+	else
+	{
+		printf("Map is incorrect\n");
+		// free_struct(map_info);
+		return (1);
+	}
 	return (0);
 }
 
-void	get_size(char **map, t_map_info *map_info)
+int flood_fill(t_map_info *map_info, int x, int y)
 {
-    int longest_line;
-    int current_len;
-    int i;
+	char	c;
 
-    longest_line = 0;
-    i = 0;
-    while (map[i])
-    {
-        current_len = ft_strlen(map[i]);
-        if (current_len > longest_line)
-            longest_line = current_len;
-        i++;
-    }
-	map_info->map_width = longest_line;
-	map_info->map_height = i;
-}
-
-void get_pos(char **map, t_map_info *map_info)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while(map[i][j])
-		{
-			if (map[i][j] != '0' && map[i][j] != '1')
-			{
-				map_info->player_x = j;
-				map_info->player_y = i;
-				break;
-			}
-			j++;
-		}
-		i++;
-	}
+	if (y < 0 || y >= map_info->map_height || x < 0 || x >= map_info->map_width)
+		return (-1);
+	c = map_info->map_copy[y][x];
+	if (c == '1' || c == 'X')
+		return (0);
+	if (c == ' ')
+		return (-1);
+	map_info->map_copy[y][x] = 'X';
+	if (flood_fill(map_info, x + 1, y) == -1)
+        return (-1);
+    if (flood_fill(map_info, x - 1, y) == -1)
+        return (-1);
+    if (flood_fill(map_info, x, y + 1) == -1)
+        return (-1);
+    if (flood_fill(map_info, x, y - 1) == -1)
+        return (-1);
+	return (0);
 }

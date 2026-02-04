@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/02/04 16:56:51 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/02/04 19:17:20 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,12 @@ void	print_struct(t_map *map);
 int		handle_error();
 
 //	flood_fill.c
-int		flood_fill(t_map *map);
+int flood_fill(t_map_info *map_info, int x, int y);
+int	is_map_correct(t_map *map);
+
+//	flood_fill_utils.c
+void	map_info_print(t_map_info *map_info);
+t_map_info *struct_filler(t_map *map);
 void get_pos(char **map, t_map_info *map_info);
 void	get_size(char **map, t_map_info *map_info);
 
