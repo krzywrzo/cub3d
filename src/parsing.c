@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 16:45:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/01/26 17:22:32 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/02/03 10:45:49 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_map	*handle_file(int fd)
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		handle_error();
-	while (line = get_next_line(fd))
+	while ((line = get_next_line(fd)))
 	{
 		handle_line(map, line);
 		free(line);

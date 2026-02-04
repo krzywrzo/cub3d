@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:43:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/01/26 17:19:08 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:01:45 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main (int argc, char **argv)
 	if (!map)
 		return(handle_error());	//	TODO
 	// print_struct(map);
+	flood_fill(map);	// TODO: flood_fill()
 	free_map(map);
 	return (0);
 }

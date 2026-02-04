@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/01/26 17:18:56 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:56:51 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
+typedef struct s_map_info
+{
+	int	player_x;
+	int	player_y;
+	int	map_width;
+	int	map_height;
+	char	**map_copy;
+}	t_map_info;
+
 typedef struct s_cub
 {
 	void	*mlx;
@@ -58,5 +67,10 @@ void	free_map(t_map *map);
 int 	ft_strlcmp(const char *s1, const char *s2, size_t n);
 void	print_struct(t_map *map);
 int		handle_error();
+
+//	flood_fill.c
+int		flood_fill(t_map *map);
+void get_pos(char **map, t_map_info *map_info);
+void	get_size(char **map, t_map_info *map_info);
 
 # endif
