@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:01:27 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/02/04 19:03:25 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/04/08 16:31:20 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_map_info *struct_filler(t_map *map)
 	}
 	get_pos(map_info->map_copy, map_info);
 	get_size(map_info->map_copy, map_info);
+	map_info->direction = map->map[map_info->player_x][map_info->player_y];
 	return(map_info);
 }
 

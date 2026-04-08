@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/04/08 12:41:30 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/04/08 16:31:41 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,23 @@ typedef struct s_img
 	int		endian;	// needed for MAC vs Linux (i will delete this later)
 }		t_img;
 
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	double	view_dir_x;
+	double	view_dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
 
 /*	FUNCTIONS	*/
 
 //	win_creation.c
 int	close_app(void *param);
 int	mlx_create_window(t_cub *mlx);
-int	my_mlx_init(t_map *map, t_map_info *map_info);
+int	my_mlx_init(t_map_info *map_info);
 void	my_pixel_put(t_img *img, int x, int y, int color);
+
+void draw_background(t_img *img);
 # endif

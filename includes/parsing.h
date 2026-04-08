@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:56:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/04/04 17:56:11 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/04/08 16:57:50 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,16 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
+
+// main map structur, with all of crucial data needed, 
+// if u need to add something, add this in struct_filler function
 typedef struct s_map_info
 {
 	int	player_x;
 	int	player_y;
 	int	map_width;
 	int	map_height;
+	char	direction;
 	char	**map_copy;
 }	t_map_info;
 
