@@ -1,3 +1,4 @@
 minilibx
 .DS_Store
 *.o
+.gitignore

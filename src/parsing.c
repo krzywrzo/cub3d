@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 16:45:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/02/08 15:50:54 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/04/04 16:01:41 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+
+//TODO: parsing
+// -> correct file format
+// -> celling and floor colors within RGB range
+// -> checking if path to the texture is valid
+// -> checking if perms to the files are valid 
+
+
+t_map	*parser(char **argv)
+{
+	t_map	*map;
+
+	map = map_parse(argv[1]);
+	if (!map)
+		return (NULL);
+	if (is_map_correct(map) == 1)
+	{
+		free_map(map);
+		return (NULL);
+	}
+	return(map);
+}
 
 t_map	*map_parse(char *map_path)
 {
@@ -64,7 +87,7 @@ void	handle_line(t_map *map, char *line)
 		map->we = ft_strdup(line);
 	else if (ft_strlcmp(line, "EA", 2) == 0)
 		map->ea = ft_strdup(line);
-	else if (line[0] == '1' || line[0] == '0')
+	else if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
 	{
 		temp = map->one_line_map;
 		if (!temp)
