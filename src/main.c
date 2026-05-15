@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:43:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/04/08 16:31:33 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/05/15 14:10:05 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
 int	main(int argc, char **argv)
 {
 	t_map	*map;
-	t_map_info	*map_info;
 
-	map = parser(argv);
+	map = parsing(argc, argv);
 	if (!map)
-		return (1);
-	map_info = struct_filler(map);
-	if (!map_info)
-	{
-		free_map(map);
-		return (1);
-	}
-	my_mlx_init(map_info);
-	free_map(map);
+		return (0);
+	else
+		printf("Map is correct\n");
+	clean_struct(map);
 	return (0);
 }

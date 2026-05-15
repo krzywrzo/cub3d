@@ -1,59 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   utils_07.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 15:10:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/05/15 14:04:07 by kwrzosek         ###   ########.fr       */
+/*   Created: 2026/05/15 14:08:34 by kwrzosek          #+#    #+#             */
+/*   Updated: 2026/05/15 14:10:19 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-t_map	*parsing(int argc, char **argv)
+int	check_fc_line(t_fc *fc, char *line)
 {
-	t_map	*map;
-	int		fd;
-
-	if (argc != 2 || ext_checker(argv[1]) == -1)
-		return (NULL);
-	map = ft_calloc(1, sizeof(t_map));
-	if (!map)
-		return (NULL);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
+	if (ft_strlcmp(line, "F", 1) == 0)
 	{
-		perror("Error\nCould not open file");
-		free(map);
-		return (NULL);
+		if (fc->f != NULL)
+			return (1);
+		fc->f = ft_strdup(line);
 	}
-	if (parse_file_loop(fd, map) == -1)
+	else if (ft_strlcmp(line, "C", 1) == 0)
 	{
-		close(fd);
-		return (NULL);
+		if (fc->c != NULL)
+			return (1);
+		fc->c = ft_strdup(line);
 	}
-	close(fd);
-	if (validate_parsed_map(map) == -1)
-		return (NULL);
-	return (map);
+	return (0);
 }
 
-int	parse_file_loop(int fd, t_map *map)
+int	loop_fc(int fd, t_fc *fc)
 {
 	char	*line;
 
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL && ft_strlen(line) > 0)
 	{
-		if (process_line(line, map) == -1)
+		if (check_fc_line(fc, line) == 1)
 		{
 			free(line);
-			return (-1);
+			return (1);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (line)
+		free(line);
 	return (0);
 }
