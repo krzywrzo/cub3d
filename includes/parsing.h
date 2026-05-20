@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:56:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/05/15 14:14:41 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/05/20 12:33:23 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,8 @@ void	free_split(char **split);
 
 // utils_05.c
 int		ft_strlcmp(const char *s1, const char *s2, size_t n);
-// int		split_size(char **str, char c);
-int split_size(char **arr);
+int		split_size(char **arr);
 int		handle_error(void);
-void	clean_struct(t_map *map);
 void	copy_with_newline(char *new_str, char *s1, char *s2);
 
 // utils_06.c
@@ -105,7 +103,10 @@ int		check_texture(t_tex *tex, char *line);
 int		check_line_garbage(char *line);
 
 // utils_07.c
-int	loop_fc(int fd, t_fc *fc);
-int	check_fc_line(t_fc *fc, char *line);
+int		loop_fc(int fd, t_fc *fc);
+int		check_fc_line(t_fc *fc, char *line);
+void	free_map_strings(t_map *map);
+void	clean_struct(t_map *map);
+void	*abort_parsing(t_map *map, int fd, int do_drain);
 
 #endif

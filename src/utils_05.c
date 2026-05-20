@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 18:30:06 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/05/15 14:15:44 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/05/20 12:33:00 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,6 @@ int	split_size(char **arr)
 int	handle_error(void)
 {
 	return (1);
-}
-
-void	clean_struct(t_map *map)
-{
-	if (map->grid != NULL)
-		free_split(map->grid);
-	if (map->map_copy != NULL)
-		free_split(map->map_copy);
 }
 
 void	copy_with_newline(char *new_str, char *s1, char *s2)
