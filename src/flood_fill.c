@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 12:04:34 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/05/15 13:50:00 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:26:06 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	check_player_count(char **grid)
 
 int	check_map_validity(t_map *map)
 {
-	char	**map_copy;
 	int		status;
 
 	if (check_player_count(map->grid) != 1)
@@ -47,11 +46,15 @@ int	check_map_validity(t_map *map)
 	}
 	get_player_pos(map);
 	get_size(map->grid, map);
-	map_copy = copy_map(map->grid, map->height);
-	if (!map_copy)
+	if (map->map_copy)
+	{
+		free_split(map->map_copy);
+		map->map_copy = NULL;
+	}
+	map->map_copy = copy_map(map->grid, map->height);
+	if (!map->map_copy)
 		return (-1);
-	status = flood_fill(map_copy, map->player_x, map->player_y, map);
-	free_split(map_copy);
+	status = flood_fill(map->map_copy, map->player_x, map->player_y, map);
 	return (status);
 }
 
@@ -102,6 +105,7 @@ int	get_player_pos(t_map *map)
 {
 	int	i;
 	int	j;
+	char	direction;
 
 	i = 0;
 	while (map->grid[i])
@@ -112,8 +116,16 @@ int	get_player_pos(t_map *map)
 			if (map->grid[i][j] == 'N' || map->grid[i][j] == 'S' ||
 				map->grid[i][j] == 'E' || map->grid[i][j] == 'W')
 			{
+				direction = map->grid[i][j];
 				map->player_x = j;
 				map->player_y = i;
+				if (!map->direction)
+					map->direction = ft_strdup("N");
+				if (map->direction)
+				{
+					map->direction[0] = direction;
+					map->direction[1] = '\0';
+				}
 				return (1);
 			}
 			j++;

@@ -6,33 +6,33 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:50:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/06/21 17:49:42 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:21:08 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	player_dir(t_player *player, t_map_info *map)
+void	player_dir(t_player *player, t_map *map)
 {
-	if (map->direction == 'N')
+	if (map->direction && map->direction[0] == 'N')
 	{
 		player->view_dir_x = 0;
 		player->view_dir_y = -1;
 		player->plane_x = 0.66;
 	}
-	else if (map->direction == 'S')
+	else if (map->direction && map->direction[0] == 'S')
 	{
 		player->view_dir_x = 0;
 		player->view_dir_y = 1;
 		player->plane_x = -0.66;
 	}
-	else if (map->direction == 'E')
+	else if (map->direction && map->direction[0] == 'E')
 	{
 		player->view_dir_x = 1;
 		player->view_dir_y = 0;
 		player->plane_y = 0.66;
 	}
-	else if (map->direction == 'W')
+	else if (map->direction && map->direction[0] == 'W')
 	{
 		player->view_dir_x = -1;
 		player->view_dir_y = 0;
@@ -40,7 +40,7 @@ void	player_dir(t_player *player, t_map_info *map)
 	}
 }
 
-t_player	*init_player(t_map_info *map)
+t_player	*init_player(t_map *map)
 {
 	t_player	*player;
 

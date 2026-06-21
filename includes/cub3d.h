@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/06/21 19:12:57 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:21:08 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_dda
 	double		side_dist[4];
 	int		step[2];
 	int		side;
-}	t_dda;
+}		t_dda;
 
 typedef struct s_img
 {
@@ -99,7 +99,7 @@ typedef struct s_game
 	void		*win;
 	t_img		frame;
 	t_player	*player;
-	t_map_info	*map;
+	t_map		*map;
 	t_map		*raw_map;
 	t_texture	no;
 	t_texture	so;
@@ -109,7 +109,7 @@ typedef struct s_game
 }		t_game;
 
 int		close_app(void *param);
-int		my_mlx_init(t_map_info *map_info, t_map *raw_map);
+int		my_mlx_init(t_map *map_info, t_map *raw_map);
 int		key_press(int keycode, void *param);
 int		key_release(int keycode, void *param);
 int		game_loop(void *param);
@@ -147,7 +147,7 @@ t_ray_hit	*cast_ray(t_game *game, double ray_dir_x, double ray_dir_y);
 void	render_column(t_game *game, int x);
 
 /* hooks_movement.c */
-int		is_wall(t_map_info *map, double x, double y);
+int		is_wall(t_map *map, double x, double y);
 void	check_and_move_x(t_game *game, double move_x);
 void	check_and_move_y(t_game *game, double move_y);
 void	rotate_player(t_player *p, double rot);
@@ -159,8 +159,8 @@ void	init_texture(t_game *game, char *path, t_texture *tex);
 void	load_texture_side(t_game *game, char *map_line, t_texture *tex);
 
 /* player_init.c */
-void	player_dir(t_player *player, t_map_info *map);
-t_player	*init_player(t_map_info *map);
+void	player_dir(t_player *player, t_map *map);
+t_player	*init_player(t_map *map);
 void	destroy_textures(t_game *game);
 
 #endif

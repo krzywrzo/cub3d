@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:40:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/06/21 17:44:24 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:21:08 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	dda_step_y(t_game *game, double ray_y, t_dda *dda)
 
 int	is_wall_hit(t_game *game, int map_x, int map_y)
 {
-	if (map_x < 0 || map_y < 0 || map_y >= game->map->map_height)
+	if (map_x < 0 || map_y < 0 || map_y >= game->map->height)
 		return (1);
 	if (map_x >= (int)ft_strlen(game->map->map_copy[map_y]))
 		return (1);

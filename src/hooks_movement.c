@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:50:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/06/21 17:49:42 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:21:08 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #define MOVE_SPEED 0.05
 #define ROT_SPEED 0.04
 
-int	is_wall(t_map_info *map, double x, double y)
+int	is_wall(t_map *map, double x, double y)
 {
 	int	map_x;
 	int	map_y;
 
 	map_x = (int)x;
 	map_y = (int)y;
-	if (map_x < 0 || map_y < 0 || map_y >= map->map_height)
+	if (map_x < 0 || map_y < 0 || map_y >= map->height)
 		return (1);
 	if (map_x >= (int)ft_strlen(map->map_copy[map_y]))
 		return (1);
