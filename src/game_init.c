@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 19:45:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/06/21 19:23:18 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:53:27 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ static int	cleanup_game(t_game *game)
 	destroy_textures(game);
 	if (game->win && game->mlx)
 		mlx_destroy_window(game->mlx, game->win);
-#ifdef LINUX
 	if (game->mlx)
 		mlx_destroy_display(game->mlx);
-#endif
 	free(game->mlx);
 	clean_struct(game->map);
 	free(game);
