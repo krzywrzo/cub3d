@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:01:27 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/04/08 16:31:20 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/05/04 02:07:43 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_map_info *struct_filler(t_map *map)
 	}
 	get_pos(map_info->map_copy, map_info);
 	get_size(map_info->map_copy, map_info);
-	map_info->direction = map->map[map_info->player_x][map_info->player_y];
+	//map_info->direction = map->map[map_info->player_x][map_info->player_y];
+	map_info->direction = map_info->map_copy[map_info->player_y][map_info->player_x];
 	return(map_info);
 }
 

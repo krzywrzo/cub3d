@@ -30,14 +30,15 @@ UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S), Linux)
 # Linux flags: requires -lXext -lX11 -lm
-	MLX_LIB     = $(MLX_DIR)/libmlx_Linux.a
-	MLX_FLAGS   = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-	INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I/usr/include
+    MLX_LIB     = $(MLX_DIR)/libmlx_Linux.a
+    MLX_FLAGS   = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+    INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I/usr/include
+    CFLAGS      += -DLINUX=1
 else
 # macOS flags: requires OpenGL and AppKit frameworks
-	MLX_LIB     = $(MLX_DIR)/libmlx.a
-	MLX_FLAGS   = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-	INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
+    MLX_LIB     = $(MLX_DIR)/libmlx.a
+    MLX_FLAGS   = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+    INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 endif
 
 # ==============================================================================
