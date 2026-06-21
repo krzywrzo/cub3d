@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_06.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 13:56:02 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/06/21 19:25:54 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 20:07:06 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,15 @@ int	check_line_garbage(char *line)
 	}
 	free_split(splitted);
 	return (0);
+}
+
+void	set_player_direction(t_map *map, char dir)
+{
+	if (!map->direction)
+		map->direction = ft_strdup("N");
+	if (map->direction)
+	{
+		map->direction[0] = dir;
+		map->direction[1] = '\0';
+	}
 }

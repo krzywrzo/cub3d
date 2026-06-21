@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 12:04:34 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/06/21 19:26:06 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 20:06:55 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int	get_player_pos(t_map *map)
 {
 	int	i;
 	int	j;
-	char	direction;
 
 	i = 0;
 	while (map->grid[i])
@@ -116,16 +115,9 @@ int	get_player_pos(t_map *map)
 			if (map->grid[i][j] == 'N' || map->grid[i][j] == 'S' ||
 				map->grid[i][j] == 'E' || map->grid[i][j] == 'W')
 			{
-				direction = map->grid[i][j];
 				map->player_x = j;
 				map->player_y = i;
-				if (!map->direction)
-					map->direction = ft_strdup("N");
-				if (map->direction)
-				{
-					map->direction[0] = direction;
-					map->direction[1] = '\0';
-				}
+				set_player_direction(map, map->grid[i][j]);
 				return (1);
 			}
 			j++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:56:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/06/21 19:09:17 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 20:06:32 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int		validate_parsed_map(t_map *map);
 int		process_line(char *line, t_map *map);
 int		check_texture(t_tex *tex, char *line);
 int		check_line_garbage(char *line);
+void	set_player_direction(t_map *map, char dir);
 
 // utils_07.c
 int		loop_fc(int fd, t_fc *fc);
