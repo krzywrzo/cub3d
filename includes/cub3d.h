@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/06/21 19:01:35 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:12:57 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+
+typedef struct s_dda
+{
+	int		map_xy[2];
+	double		delta_dist[2];
+	double		side_dist[4];
+	int		step[2];
+	int		side;
+}	t_dda;
 
 typedef struct s_img
 {
