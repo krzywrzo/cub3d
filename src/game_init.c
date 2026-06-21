@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 19:45:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/06/21 19:53:27 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:59:21 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <stdlib.h>
 
 static int	cleanup_game(t_game *game)
 {
@@ -52,6 +51,26 @@ int	close_app(void *param)
 	return (0);
 }
 
+static int	init_game(t_game *game, t_map *map_info)
+{
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		return (1);
+	game->player = init_player(map_info);
+	if (!game->player)
+		return (1);
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
+	if (!game->win)
+		return (1);
+	game->frame.img_ptr = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!game->frame.img_ptr)
+		return (1);
+	game->frame.addr = mlx_get_data_addr(game->frame.img_ptr,
+			&game->frame.bits_per_pxl, &game->frame.line_len,
+			&game->frame.endian);
+	return (0);
+}
+
 int	my_mlx_init(t_map *map_info, t_map *raw_map)
 {
 	t_game	*game;
@@ -61,21 +80,8 @@ int	my_mlx_init(t_map *map_info, t_map *raw_map)
 		return (1);
 	game->map = map_info;
 	game->raw_map = raw_map;
-	game->mlx = mlx_init();
-	if (!game->mlx)
+	if (init_game(game, map_info))
 		return (cleanup_game(game));
-	game->player = init_player(map_info);
-	if (!game->player)
-		return (cleanup_game(game));
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
-	if (!game->win)
-		return (cleanup_game(game));
-	game->frame.img_ptr = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!game->frame.img_ptr)
-		return (cleanup_game(game));
-	game->frame.addr = mlx_get_data_addr(game->frame.img_ptr,
-			&game->frame.bits_per_pxl, &game->frame.line_len,
-			&game->frame.endian);
 	load_textures(game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
