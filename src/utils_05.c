@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_05.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 18:30:06 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/01/26 17:19:05 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/05/20 12:33:00 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int ft_strlcmp(const char *s1, const char *s2, size_t n)
+int	ft_strlcmp(const char *s1, const char *s2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (n == 0)
@@ -24,35 +24,38 @@ int ft_strlcmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-void	print_struct(t_map *map)
+int	split_size(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return (0);
+	i = 0;
+	while (arr[i] != NULL)
+		i++;
+	return (i);
+}
+
+int	handle_error(void)
+{
+	return (1);
+}
+
+void	copy_with_newline(char *new_str, char *s1, char *s2)
 {
 	int	i;
 	int	j;
 
-	if (map->no)
-		printf("%s\n", map->no);
-	if (map->ea)
-		printf("%s\n", map->ea);
-	if (map->so)
-		printf("%s\n", map->so);
-	if (map->we)
-		printf("%s\n", map->we);
-	printf("MAP\n");
 	i = 0;
-	while (map->map[i])
+	while (s1 && s1[i])
 	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			printf("%c", map->map[i][j]);
-			j++;
-		}
-		printf("\n");
+		new_str[i] = s1[i];
 		i++;
 	}
-}
-
-int handle_error()
-{
-	return (1);
+	if (s1)
+		new_str[i++] = '\n';
+	j = 0;
+	while (s2[j])
+		new_str[i++] = s2[j++];
+	new_str[i] = '\0';
 }

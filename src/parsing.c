@@ -5,97 +5,79 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/24 16:45:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/04/04 16:01:41 by kwrzosek         ###   ########.fr       */
+/*   Created: 2026/04/23 15:10:50 by kwrzosek          #+#    #+#             */
+/*   Updated: 2026/05/20 12:29:13 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+// t_map	*parsing(int argc, char **argv)
+// {
+// 	t_map	*map;
+// 	int		fd;
 
-//TODO: parsing
-// -> correct file format
-// -> celling and floor colors within RGB range
-// -> checking if path to the texture is valid
-// -> checking if perms to the files are valid 
+// 	if (argc != 2 || ext_checker(argv[1]) == -1)
+// 		return (NULL);
+// 	map = ft_calloc(1, sizeof(t_map));
+// 	if (!map)
+// 		return (NULL);
+// 	fd = open(argv[1], O_RDONLY);
+// 	if (fd < 0)
+// 	{
+// 		perror("Error\nCould not open file");
+// 		free(map);
+// 		return (NULL);
+// 	}
+// 	if (parse_file_loop(fd, map) == -1)
+// 	{
+// 		close(fd);
+// 		return (NULL);
+// 	}
+// 	close(fd);
+// 	if (validate_parsed_map(map) == -1)
+// 		return (NULL);
+// 	return (map);
+// }
 
-
-t_map	*parser(char **argv)
+t_map	*parsing(int argc, char **argv)
 {
 	t_map	*map;
-
-	map = map_parse(argv[1]);
-	if (!map)
-		return (NULL);
-	if (is_map_correct(map) == 1)
-	{
-		free_map(map);
-		return (NULL);
-	}
-	return(map);
-}
-
-t_map	*map_parse(char *map_path)
-{
 	int		fd;
-	t_map	*map;
 
-	fd = open(map_path, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error with opening file");
-		handle_error();
+	if (argc != 2 || ext_checker(argv[1]) == -1)
 		return (NULL);
-	}
-	map = handle_file(fd);
-	close(fd);
-	map->map = ft_split(map->one_line_map, 10);
-	if (!map->map)
-	{
-		free_map(map);
-		handle_error();
-	}
-	return (map);
-}
-
-t_map	*handle_file(int fd)
-{
-	char	*line;
-	t_map	*map;
-
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
-		handle_error();
-	while ((line = get_next_line(fd)))
+		return (NULL);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
 	{
-		handle_line(map, line);
-		free(line);
+		perror("Error");
+		return (abort_parsing(map, -1, 0));
 	}
+	if (parse_file_loop(fd, map) == -1)
+		return (abort_parsing(map, fd, 1));
+	close(fd);
+	if (validate_parsed_map(map) == -1)
+		return (abort_parsing(map, -1, 0));
 	return (map);
 }
 
-//	FIX: add proper file structure checking
-void	handle_line(t_map *map, char *line)
+int	parse_file_loop(int fd, t_map *map)
 {
-	char	*temp;
+	char	*line;
 
-	if (ft_strlcmp(line, "NO", 2) == 0)
-		map->no = ft_strdup(line);
-	else if (ft_strlcmp(line, "SO", 2) == 0)
-		map->so = ft_strdup(line);
-	else if (ft_strlcmp(line, "WE", 2) == 0)
-		map->we = ft_strdup(line);
-	else if (ft_strlcmp(line, "EA", 2) == 0)
-		map->ea = ft_strdup(line);
-	else if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		temp = map->one_line_map;
-		if (!temp)
-			map->one_line_map = ft_strdup(line);
-		else
+		if (process_line(line, map) == -1)
 		{
-			map->one_line_map = ft_strjoin(temp, line);
-			free(temp);
+			free(line);
+			return (-1);
 		}
+		free(line);
+		line = get_next_line(fd);
 	}
+	return (0);
 }
