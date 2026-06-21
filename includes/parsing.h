@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:56:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/04/08 16:57:50 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/06/21 17:43:00 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ typedef struct s_map_info
 	char	direction;
 	char	**map_copy;
 }	t_map_info;
+
+// DDA algorithm context struct
+typedef struct s_dda
+{
+	int		map_xy[2];
+	double		delta_dist[2];
+	double		side_dist[4];
+	int		step[2];
+	int		side;
+}	t_dda;
 
 
 
