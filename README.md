@@ -60,18 +60,15 @@ Replace `map_file.cub` with a valid map file.
 ### Keyboard Controls
 
 - **W** - Move forward
-- **A** - Move left
+- **A** - Rotate view left
 - **S** - Move backward
-- **D** - Move right
-- **LEFT ARROW** - Rotate view left
-- **RIGHT ARROW** - Rotate view right
+- **D** - Rotate view right
 - **ESC** - Close application
 
 ## Map Format
 
 Map files must have a `.cub` extension and include:
 
-- **R** - Screen resolution (e.g., `R 1920 1080`)
 - **NO** - North texture path
 - **SO** - South texture path
 - **EA** - East texture path
@@ -86,8 +83,6 @@ Map files must have a `.cub` extension and include:
 ### Example Map
 
 ```
-R 1920 1080
-
 NO textures/north.xpm
 SO textures/south.xpm
 EA textures/east.xpm
@@ -125,12 +120,10 @@ cub3d/
 
 ## Compilation Details
 
-- **Compiler Flags**: `-DLINUX=1` for Linux-specific features
 - **Libraries Used**:
   - libft (custom C library functions)
   - MiniLibX (graphics rendering)
   - X11 (display server)
-- **Optimization**: Compiled with `-g` for debugging support
 
 ## Code Standards
 
