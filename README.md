@@ -1,3 +1,5 @@
+This project has been created as part of the 42 curriculum by szmadeja, kwrzosek
+
 # cub3D
 
 A 3D raycasting game engine inspired by Wolfenstein 3D, developed as part of the 42 school curriculum.
@@ -5,6 +7,19 @@ A 3D raycasting game engine inspired by Wolfenstein 3D, developed as part of the
 ## Description
 
 cub3D is a minimalist 3D graphics project that implements a raycasting algorithm to render a pseudo-3D perspective view of a maze-like environment. Players can navigate through the map using keyboard controls and view textured walls with proper perspective rendering.
+
+## AI Usage 
+AI was used for research (raycasting algorithm, floodfill algorithm, parsing cases), code refactor (mostly to 42 norm), code testing (simple bash script to bulk testing maps), simple maps examples, 
+
+## Resources
+flood fill algorithm 
+https://www.geeksforgeeks.org/dsa/flood-fill-algorithm/
+
+DDA algorithm
+https://www.geeksforgeeks.org/computer-graphics/dda-line-generation-algorithm-computer-graphics/
+
+minilibx
+https://github.com/42paris/minilibx-linux
 
 ## Features
 
@@ -145,7 +160,3 @@ The program will exit with an error message if:
 ## License
 
 School project - 42 network
-
-## Author
-
-- kwrzosek & szmadeja (42 students)
