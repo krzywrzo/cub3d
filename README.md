@@ -37,7 +37,7 @@ This will:
 ## Usage
 
 ```bash
-./cub3D maps/map_file.cub
+./cub3D maps/valid_map.cub
 ```
 
 Replace `map_file.cub` with a valid map file.
