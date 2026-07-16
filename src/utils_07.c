@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:08:34 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/05/15 14:10:19 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/07/16 19:20:04 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	check_fc_line(t_fc *fc, char *line)
 {
-	if (ft_strlcmp(line, "F", 1) == 0)
+	if (ft_strlcmp(line, "F ", 2) == 0 || ft_strlcmp(line, "F\t", 2) == 0)
 	{
-		if (fc->f != NULL)
-			return (1);
+		if (fc->f != NULL || check_line_garbage(line) == -1)
+			return (-1);
 		fc->f = ft_strdup(line);
 	}
-	else if (ft_strlcmp(line, "C", 1) == 0)
+	else if (ft_strlcmp(line, "C ", 2) == 0 || ft_strlcmp(line, "C\t", 2) == 0)
 	{
-		if (fc->c != NULL)
-			return (1);
+		if (fc->c != NULL || check_line_garbage(line) == -1)
+			return (-1);
 		fc->c = ft_strdup(line);
 	}
 	return (0);
@@ -36,9 +36,13 @@ int	loop_fc(int fd, t_fc *fc)
 	line = get_next_line(fd);
 	while (line != NULL && ft_strlen(line) > 0)
 	{
-		if (check_fc_line(fc, line) == 1)
+		if (check_fc_line(fc, line) == -1)
 		{
-			free(line);
+			while (line != NULL)
+			{
+				free(line);
+				line = get_next_line(fd);
+			}
 			return (1);
 		}
 		free(line);
