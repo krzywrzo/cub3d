@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/06/21 20:02:15 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/19 00:44:56 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define HEIGHT 720
 
 # define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -78,6 +80,7 @@ typedef struct s_draw_col
 	int			x;
 	int			draw_start;
 	int			draw_end;
+	int			line_height;
 	int			tex_x;
 	t_texture	*tex;
 }				t_draw_col;
