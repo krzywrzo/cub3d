@@ -40,8 +40,8 @@ int	calc_tex_x(t_texture *tex, double wall_x, t_ray_hit *hit)
 	int	tex_x;
 
 	tex_x = (int)(wall_x * (double)tex->width);
-	if ((hit->side == 0 && hit->ray_dir_x > 0)
-		|| (hit->side == 1 && hit->ray_dir_y < 0))
+	if ((hit->side == 0 && hit->ray_dir_x < 0)
+		|| (hit->side == 1 && hit->ray_dir_y > 0))
 		tex_x = tex->width - tex_x - 1;
 	return (tex_x);
 }
