@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/19 00:44:56 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:38:31 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void			init_draw_col(t_game *game, t_ray_hit *hit, t_draw_col *col);
 void			draw_pixels(t_game *game, t_draw_col *col);
 void			draw_pixel_column(t_game *game, t_ray_hit *hit,
 					t_draw_col *col);
+int				parse_rgb(char *color);
 
 /* raycasting_ray.c */
 void			get_ray_direction(t_game *game, int x, double *ray_dir_x,
@@ -157,6 +158,7 @@ void			check_and_move_x(t_game *game, double move_x);
 void			check_and_move_y(t_game *game, double move_y);
 void			rotate_player(t_player *p, double rot);
 void			handle_movement(t_game *game);
+int				is_wall(t_map *map, double x, double y);
 
 /* textures.c */
 char			*extract_path(char *line);

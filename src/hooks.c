@@ -6,11 +6,43 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:00:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/19 00:42:43 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:40:21 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	parse_rgb(char *color)
+{
+	char	**rgb;
+	int		r;
+	int		g;
+	int		b;
+	int		c;
+
+	rgb = ft_split(color, ',');
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	c = (r << 16) | (g << 8) | b;
+	return (c);
+}
+
+int	is_wall(t_map *map, double x, double y)
+{
+	int	map_x;
+	int	map_y;
+
+	map_x = (int)x;
+	map_y = (int)y;
+	if (map_x <= 0 || map_y <= 0 || map_y >= map->height)
+		return (1);
+	if (map_x >= (int)ft_strlen(map->map_copy[map_y]))
+		return (1);
+	if (map->map_copy[map_y][map_x] == '1')
+		return (1);
+	return (0);
+}
 
 int	key_press(int keycode, void *param)
 {

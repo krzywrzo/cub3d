@@ -6,33 +6,17 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:40:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/19 00:18:04 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:40:23 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int 	parse_rgb(char *color)
-{
-	char **rgb;
-	int r;
-	int g;
-	int b;
-	int	c;
-
-	rgb = ft_split(color, ',');
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	c = (r << 16) | (g << 8) | b;
-	return (c);
-}
-
 void	fill_background(t_game *game, int x, int draw_start, int draw_end)
 {
 	int	y;
-	int c;
-	int f;
+	int	c;
+	int	f;
 
 	c = parse_rgb(game->map->c);
 	f = parse_rgb(game->map->f);
@@ -52,12 +36,6 @@ void	fill_background(t_game *game, int x, int draw_start, int draw_end)
 
 void	get_draw_bounds(t_ray_hit *hit, int *draw_start, int *draw_end)
 {
-	// if (hit->distance <= 0.00001)
-	// {
-	// 	*draw_start = 0;
-	// 	*draw_end = HEIGHT - 1;
-	// 	return;
-	// }
 	*draw_start = -((int)(HEIGHT / hit->distance)) / 2 + HEIGHT / 2;
 	*draw_end = ((int)(HEIGHT / hit->distance)) / 2 + HEIGHT / 2;
 	if (*draw_start < 0)

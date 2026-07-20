@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:54:34 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/19 00:59:59 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:34:02 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,35 @@
 #define ROT_SPEED 0.02
 #define PLAYER_RADIUS 0.12
 
-int	is_wall(t_map *map, double x, double y)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)x;
-	map_y = (int)y;
-	if (map_x <= 0 || map_y <= 0 || map_y >= map->height)
-		return (1);
-	if (map_x >= (int)ft_strlen(map->map_copy[map_y]))
-		return (1);
-	if (map->map_copy[map_y][map_x] == '1')
-		return (1);
-	return (0);
-}
 int	is_blocked_radius(t_map *map, double x, double y)
 {
-    if (is_wall(map, x + PLAYER_RADIUS, y))
-        return (1);
-    if (is_wall(map, x - PLAYER_RADIUS, y))
-        return (1);
-    if (is_wall(map, x, y + PLAYER_RADIUS))
-        return (1);
-    if (is_wall(map, x, y - PLAYER_RADIUS))
-        return (1);
-    return (0);
+	if (is_wall(map, x + PLAYER_RADIUS, y))
+		return (1);
+	if (is_wall(map, x - PLAYER_RADIUS, y))
+		return (1);
+	if (is_wall(map, x, y + PLAYER_RADIUS))
+		return (1);
+	if (is_wall(map, x, y - PLAYER_RADIUS))
+		return (1);
+	return (0);
 }
 
 void	check_and_move_x(t_game *game, double move_x)
 {
 	double	next_x;
 
-    next_x = game->player->pos_x + move_x;
-    if (!is_blocked_radius(game->map, next_x, game->player->pos_y))
-        game->player->pos_x = next_x;
+	next_x = game->player->pos_x + move_x;
+	if (!is_blocked_radius(game->map, next_x, game->player->pos_y))
+		game->player->pos_x = next_x;
 }
 
 void	check_and_move_y(t_game *game, double move_y)
 {
 	double	next_y;
 
-    next_y = game->player->pos_y + move_y;
-    if (!is_blocked_radius(game->map, game->player->pos_x, next_y))
-        game->player->pos_y = next_y;
+	next_y = game->player->pos_y + move_y;
+	if (!is_blocked_radius(game->map, game->player->pos_x, next_y))
+		game->player->pos_y = next_y;
 }
 
 void	rotate_player(t_player *p, double rot)
