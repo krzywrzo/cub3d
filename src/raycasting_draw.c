@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:40:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/20 18:44:12 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 21:01:55 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	get_draw_bounds(t_ray_hit *hit, int *draw_start, int *draw_end)
 	if (*draw_start < 0)
 		*draw_start = 0;
 	if (*draw_end >= HEIGHT)
-		*draw_end = HEIGHT - 1;
+		*draw_end = HEIGHT;
 }
 
 void	init_draw_col(t_game *game, t_ray_hit *hit, t_draw_col *col)

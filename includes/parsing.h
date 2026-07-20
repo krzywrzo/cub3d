@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 17:56:09 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/07/20 20:08:55 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/07/20 20:14:11 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	set_player_direction(t_map *map, char dir);
 
 // utils_07.c
 int		is_valid_char(char *line, int flag);
-int	is_minus(char **rgb);
+int		is_minus(char **rgb);
 int		loop_fc(int fd, t_fc *fc);
 int		check_fc_line(t_fc *fc, char *line);
 void	free_map_strings(t_map *map);
