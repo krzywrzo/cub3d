@@ -42,7 +42,7 @@ all: $(LIBFT) $(MLX_LIB) $(NAME)
 $(NAME): $(OBJS)
 	@echo "Linking $(NAME)..."
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
-	@echo "✅ $(NAME) built successfully!"
+	@echo " $(NAME) built successfully!"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
