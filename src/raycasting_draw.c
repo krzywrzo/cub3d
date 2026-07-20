@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_draw.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:40:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/19 00:18:04 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:36:39 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int 	parse_rgb(char *color)
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	c = (r << 16) | (g << 8) | b;
+	free_split(rgb);
 	return (c);
 }
 
