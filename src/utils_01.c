@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 13:20:43 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/05/15 14:09:04 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/07/16 19:19:43 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	fc_checker(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error with opening file\n");
+		perror("Error");
 		free(fc);
 		return (-1);
 	}
@@ -69,36 +69,10 @@ int	fc_checker(char *filename)
 		return (free_fc(fc, 1));
 	}
 	close(fd);
+	if (fc->f == NULL || fc->c == NULL)
+		return (free_fc(fc, 1));
 	return (free_fc(fc, 0));
 }
-
-// int	fc_checker(char *filename)
-// {
-// 	int		fd;
-// 	t_fc	*fc;
-// 	char	*line;
-
-// 	fc = malloc(sizeof(t_fc));
-// 	if (!fc)
-// 		return (-1);
-// 	fd = open(filename, O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("Error with opening file\n");
-// 		return (-1);
-// 	}
-// 	while (ft_strlen(line = get_next_line(fd)) > 0)
-// 	{
-// 		if (ft_strlcmp(line, "F", 1) == 0)
-// 			if (fc->f != NULL)
-// 				return (free_fc(fc, 1));
-// 		else if (ft_strlcmp(line, "C", 1) == 0)
-// 			if (fc->c != NULL)
-// 				return (free_fc(fc, 1));
-// 	}
-// 	close(fd);
-// 	return (free_fc(fc, 0));
-// }
 
 int	is_garbage_values(int fd)
 {
