@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:00:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/20 18:50:49 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 20:11:39 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ int	parse_rgb(char *color)
 	int		c;
 
 	rgb = ft_split(color, ',');
+	if (!rgb || split_size(rgb) != 3)
+	{
+		if (rgb)
+			free_split(rgb);
+		return (-1);
+	}
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);

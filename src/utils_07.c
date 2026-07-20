@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_07.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:08:34 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/07/20 18:40:32 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 20:11:02 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_fc_line(t_fc *fc, char *line)
 	{
 		if (fc->f != NULL || check_line_garbage(line) == -1)
 			return (-1);
-		if (is_minus(line) == -1)
+		if (is_valid_char(line, 0) == -1)
 			return (-1);
 		fc->f = ft_strdup(line);
 	}
@@ -26,7 +26,7 @@ int	check_fc_line(t_fc *fc, char *line)
 	{
 		if (fc->c != NULL || check_line_garbage(line) == -1)
 			return (-1);
-		if (is_minus(line) == -1)
+		if (is_valid_char(line, 1) == -1)
 			return (-1);
 		fc->c = ft_strdup(line);
 	}
