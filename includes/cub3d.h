@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:58:21 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/20 18:38:31 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 19:13:10 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int				my_mlx_init(t_map *map_info, t_map *raw_map);
 int				key_press(int keycode, void *param);
 int				key_release(int keycode, void *param);
 int				game_loop(void *param);
-void			load_textures(t_game *game);
+int				load_textures(t_game *game);
 void			render_scene(t_game *game);
 int				get_texture_color(t_texture *tex, int x, int y);
 void			my_pixel_put(t_img *img, int x, int y, int color);
@@ -162,8 +162,8 @@ int				is_wall(t_map *map, double x, double y);
 
 /* textures.c */
 char			*extract_path(char *line);
-void			init_texture(t_game *game, char *path, t_texture *tex);
-void			load_texture_side(t_game *game, char *map_line, t_texture *tex);
+int				init_texture(t_game *game, char *path, t_texture *tex);
+int				load_texture_side(t_game *game, char *map_line, t_texture *tex);
 
 /* player_init.c */
 void			player_dir(t_player *player, t_map *map);

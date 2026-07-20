@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:43:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/07/20 18:43:47 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 19:02:04 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,5 @@ int	main(int argc, char **argv)
 	map = parsing(argc, argv);
 	if (!map)
 		return (1);
-	my_mlx_init(map, map);
-	clean_struct(map);
-	return (0);
-	// return (my_mlx_init(map, map));
+	return (my_mlx_init(map, map));
 }

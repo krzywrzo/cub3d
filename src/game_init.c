@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 19:45:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/05 21:32:22 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 19:09:21 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	my_mlx_init(t_map *map_info, t_map *raw_map)
 	game->raw_map = raw_map;
 	if (init_game(game, map_info))
 		return (cleanup_game(game));
-	load_textures(game);
+	if (load_textures(game))
+		return (cleanup_game(game));
 	mlx_hook(game->win, 2, 1L << 0, (int (*)())key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, (int (*)())key_release, game);
 	mlx_hook(game->win, 17, 0, (int (*)())close_app, game);

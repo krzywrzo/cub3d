@@ -6,7 +6,7 @@
 /*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:00:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/05 21:30:37 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 19:11:41 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,46 +30,63 @@ char	*extract_path(char *line)
 	return (path);
 }
 
-void	init_texture(t_game *game, char *path, t_texture *tex)
+int	init_texture(t_game *game, char *path, t_texture *tex)
 {
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Error: invalid texture path: %s\n", path);
+		return (1);
+	}
+	close (fd);
 	if (!path || path[0] == '\0')
 	{
 		printf("Error: Invalid texture path\n");
-		return ;
+		return (1);
 	}
 	tex->img = mlx_xpm_file_to_image(game->mlx, path,
 			&tex->width, &tex->height);
 	if (!tex->img)
 	{
 		printf("Error: Could not load texture: %s\n", path);
-		return ;
+		return (1);
 	}
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
 			&tex->line_len, &tex->endian);
+	return (0);
 }
 
-void	load_texture_side(t_game *game, char *map_line, t_texture *tex)
+int	load_texture_side(t_game *game, char *map_line, t_texture *tex)
 {
 	char	*path;
+	int		ret;
 
 	if (!map_line)
-		return ;
+		return (1);
 	path = extract_path(map_line);
-	init_texture(game, path, tex);
+	ret = init_texture(game, path, tex);
 	free(path);
+	return (ret);
 }
 
-void	load_textures(t_game *game)
+int	load_textures(t_game *game)
 {
 	if (!game->raw_map)
 	{
 		printf("Error: raw_map is NULL\n");
-		return ;
+		return (1);
 	}
-	load_texture_side(game, game->raw_map->no, &game->no);
-	load_texture_side(game, game->raw_map->so, &game->so);
-	load_texture_side(game, game->raw_map->we, &game->we);
-	load_texture_side(game, game->raw_map->ea, &game->ea);
+	if (load_texture_side(game, game->raw_map->no, &game->no))
+		return (1);
+	if (load_texture_side(game, game->raw_map->so, &game->so))
+		return (1);
+	if (load_texture_side(game, game->raw_map->we, &game->we))
+		return (1);
+	if (load_texture_side(game, game->raw_map->ea, &game->ea))
+		return (1);
+	return (0);
 }
 
 int	get_texture_color(t_texture *tex, int x, int y)
