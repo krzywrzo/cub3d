@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:29:27 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/05/15 14:11:55 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:28:55 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,43 @@ int	is_dups(int fd)
 
 int	ext_checker(char *filename)
 {
-	char	**file_split;
+	int	len;
 
-	file_split = ft_split(filename, '.');
-	if (!file_split[1])
+	if (!filename)
+		return (-1);
+	len = ft_strlen(filename);
+	if (len < 4 || ft_strncmp(filename + (len - 4), ".cub", 4) != 0)
 	{
-		free_split(file_split);
+		printf("Error\nWrong file extension\n");
 		return (-1);
 	}
-	if (ft_strncmp(file_split[1], "cub", 3) != 0)
-	{
-		printf("Wrong file extension %s\n", file_split[1]);
-		free_split(file_split);
-		return (-1);
-	}
-	if (file_split[2])
-	{
-		free_split(file_split);
-		return (-1);
-	}
-	free_split(file_split);
 	return (0);
 }
+
+// int	ext_checker(char *filename)
+// {
+// 	char	**file_split;
+
+// 	file_split = ft_split(filename, '.');
+// 	if (!file_split[1])
+// 	{
+// 		free_split(file_split);
+// 		return (-1);
+// 	}
+// 	if (ft_strncmp(file_split[1], "cub", 3) != 0)
+// 	{
+// 		printf("Wrong file extension %s\n", file_split[1]);
+// 		free_split(file_split);
+// 		return (-1);
+// 	}
+// 	if (file_split[2])
+// 	{
+// 		free_split(file_split);
+// 		return (-1);
+// 	}
+// 	free_split(file_split);
+// 	return (0);
+// }
 
 int	get_map_size(char **map, int flag)
 {
