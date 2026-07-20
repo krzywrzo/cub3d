@@ -70,3 +70,55 @@ int	loop_fc(int fd, t_fc *fc)
 		free(line);
 	return (0);
 }
+
+void	free_map_strings(t_map *map)
+{
+	if (map->no)
+		free(map->no);
+	if (map->so)
+		free(map->so);
+	if (map->ea)
+		free(map->ea);
+	if (map->we)
+		free(map->we);
+	if (map->f)
+		free(map->f);
+	if (map->c)
+		free(map->c);
+	if (map->raw_map)
+		free(map->raw_map);
+	if (map->direction)
+		free(map->direction);
+}
+
+void	clean_struct(t_map *map)
+{
+	if (!map)
+		return ;
+	free_map_strings(map);
+	if (map->grid)
+		free_split(map->grid);
+	if (map->map_copy)
+		free_split(map->map_copy);
+	free(map);
+}
+
+void	*abort_parsing(t_map *map, int fd, int do_drain)
+{
+	char	*line;
+
+	if (do_drain && fd >= 0)
+	{
+		line = get_next_line(fd);
+		while (line != NULL)
+		{
+			free(line);
+			line = get_next_line(fd);
+		}
+	}
+	if (fd >= 0)
+		close(fd);
+	if (map)
+		clean_struct(map);
+	return (NULL);
+}

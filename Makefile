@@ -1,11 +1,7 @@
-# ==============================================================================
-#                                     CONFIG
-# ==============================================================================
 
 NAME        = cub3D
 CC          = cc
-#CFLAGS      = -Wall -Wextra -Werror -g
-CFLAGS		= -g
+CFLAGS      = -Wall -Wextra -Werror -g
 
 # Directories
 SRC_DIR     = src
@@ -19,35 +15,19 @@ LIBFT_LIB   = $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
 
 # Source Files
-SRCS        = $(wildcard $(SRC_DIR)/*.c)
-OBJS        = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
+SRCS        = flood_fill.c game_init.c hooks_movement.c hooks.c main.c parsing.c player_init.c raycasting_dda.c \
+raycasting_draw.c raycasting_ray.c raycasting_textures.c textures.c utils_01.c utils_02.c utils_03.c utils_04.c \
+utils_05.c utils_06.c utils_07.c 
+OBJS        = $(SRC:.c=.o)
 
-# ==============================================================================
-#                                 OS DETECTION
-# ==============================================================================
 
-UNAME_S := $(shell uname -s)
-
-ifeq ($(UNAME_S), Linux)
-# Linux flags: requires -lXext -lX11 -lm
-	MLX_LIB     = $(MLX_DIR)/libmlx_Linux.a
-	MLX_FLAGS   = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-	INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I/usr/include
-else
-# macOS flags: requires OpenGL and AppKit frameworks
-	MLX_LIB     = $(MLX_DIR)/libmlx.a
-	MLX_FLAGS   = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-	INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
-endif
-
-# ==============================================================================
-#                                     RULES
-# ==============================================================================
+MLX_LIB     = $(MLX_DIR)/libmlx_Linux.a
+MLX_FLAGS   = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+INCLUDES    = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I/usr/include
+CFLAGS      += -DLINUX=1
 
 all: $(LIBFT_LIB) $(MLX_LIB) $(NAME)
 
-# Compile the executable
-# Note: Libft flags usually come before MLX flags to avoid symbol conflicts
 $(NAME): $(OBJS)
 	@echo "Linking $(NAME)..."
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
@@ -70,10 +50,6 @@ $(LIBFT_LIB):
 $(MLX_LIB):
 	@echo "Compiling MinilibX..."
 	@make -C $(MLX_DIR)
-
-# ==============================================================================
-#                                   CLEANUP
-# ==============================================================================
 
 clean:
 	@echo "Cleaning object files..."

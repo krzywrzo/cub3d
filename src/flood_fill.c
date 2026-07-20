@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 12:04:34 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/05/15 13:50:00 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/06/21 20:06:55 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	check_player_count(char **grid)
 
 int	check_map_validity(t_map *map)
 {
-	char	**map_copy;
 	int		status;
 
 	if (check_player_count(map->grid) != 1)
@@ -47,11 +46,15 @@ int	check_map_validity(t_map *map)
 	}
 	get_player_pos(map);
 	get_size(map->grid, map);
-	map_copy = copy_map(map->grid, map->height);
-	if (!map_copy)
+	if (map->map_copy)
+	{
+		free_split(map->map_copy);
+		map->map_copy = NULL;
+	}
+	map->map_copy = copy_map(map->grid, map->height);
+	if (!map->map_copy)
 		return (-1);
-	status = flood_fill(map_copy, map->player_x, map->player_y, map);
-	free_split(map_copy);
+	status = flood_fill(map->map_copy, map->player_x, map->player_y, map);
 	return (status);
 }
 
@@ -114,6 +117,7 @@ int	get_player_pos(t_map *map)
 			{
 				map->player_x = j;
 				map->player_y = i;
+				set_player_direction(map, map->grid[i][j]);
 				return (1);
 			}
 			j++;

@@ -92,3 +92,14 @@ int	check_line_garbage(char *line)
 	free_split(splitted);
 	return (0);
 }
+
+void	set_player_direction(t_map *map, char dir)
+{
+	if (!map->direction)
+		map->direction = ft_strdup("N");
+	if (map->direction)
+	{
+		map->direction[0] = dir;
+		map->direction[1] = '\0';
+	}
+}

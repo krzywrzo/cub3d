@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:43:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/07/16 19:26:12 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/06/21 19:23:18 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
+	t_map		*map;
 
+	if (argc != 2)
+		return (1);
 	map = parsing(argc, argv);
 	if (!map)
-		return (0);
-	else
-		printf("Map is correct\n");
-	clean_struct(map);
-	return (0);
+		return (1);
+	return (my_mlx_init(map, map));
 }
