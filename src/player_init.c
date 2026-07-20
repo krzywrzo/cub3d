@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:50:00 by szmadeja          #+#    #+#             */
-/*   Updated: 2026/07/05 21:24:55 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/20 17:59:48 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	player_dir(t_player *player, t_map *map)
 	if (map->direction && map->direction[0] == 'N')
 	{
 		player->view_dir_x = 0;
-		player->view_dir_y =- 1;
+		player->view_dir_y = -1;
 		player->plane_x = 0.66;
 	}
 	else if (map->direction && map->direction[0] == 'S')

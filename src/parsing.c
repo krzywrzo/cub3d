@@ -6,31 +6,11 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:10:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/07/20 17:47:05 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/07/20 18:07:59 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	*abort_parsing(t_map *map, int fd, int do_drain)
-{
-	char	*line;
-
-	if (do_drain && fd >= 0)
-	{
-		line = get_next_line(fd);
-		while (line != NULL)
-		{
-			free(line);
-			line = get_next_line(fd);
-		}
-	}
-	if (fd >= 0)
-		close(fd);
-	if (map)
-		clean_struct(map);
-	return (NULL);
-}
 
 t_map	*parsing(int argc, char **argv)
 {
