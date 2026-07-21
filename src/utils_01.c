@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 13:20:43 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/07/16 19:19:43 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/07/21 14:12:08 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	fc_checker(char *filename)
 	if (fd < 0)
 	{
 		perror("Error");
+		printf("Wrong floor/ceiling color\n");
 		free(fc);
 		return (-1);
 	}

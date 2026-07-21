@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 15:43:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/07/20 20:58:14 by szmadeja         ###   ########.fr       */
+/*   Updated: 2026/07/21 14:12:39 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,10 @@ int	main(int argc, char **argv)
 	t_map		*map;
 
 	if (argc != 2)
+	{
+		ft_printf("Error\nNo map provided\n");
 		return (1);
+	}
 	map = parsing(argc, argv);
 	if (!map)
 		return (1);

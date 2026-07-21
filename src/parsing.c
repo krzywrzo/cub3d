@@ -6,7 +6,7 @@
 /*   By: kwrzosek <kwrzosek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:10:50 by kwrzosek          #+#    #+#             */
-/*   Updated: 2026/07/20 18:24:40 by kwrzosek         ###   ########.fr       */
+/*   Updated: 2026/07/21 14:12:14 by kwrzosek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_map	*parsing(int argc, char **argv)
 	}
 	if (parse_file_loop(fd, map) == -1 || fc_checker(argv[1]) == -1)
 	{
-		printf("Error\nWrong floor/ceiling color");
 		return (abort_parsing(map, fd, 1));
 	}
 	close(fd);

@@ -60,9 +60,11 @@ Replace `map_file.cub` with a valid map file.
 ### Keyboard Controls
 
 - **W** - Move forward
-- **A** - Rotate view left
+- **A** - Move left
 - **S** - Move backward
-- **D** - Rotate view right
+- **D** - Move right
+- **Right Arrow** - Look right
+- **Left Arrow** - Look left
 - **ESC** - Close application
 
 ## Map Format
